@@ -20,27 +20,22 @@ const Contact = ({ darkMode }: ContactProps) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const res = await fetch('/api/sendEmail', {
+      const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
-      let data: any = null;
-      const contentType = res.headers.get('content-type') || '';
-      if (contentType.includes('application/json')) {
-        data = await res.json();
-      } else {
-        const text = await res.text();
-        if (res.ok) {
-          data = { ok: true };
-        } else {
-          throw new Error(text || `Request failed with status ${res.status}`);
-        }
+      
+      const data = await res.json();
+      
+      if (!res.ok || !data.success) {
+        throw new Error(data.error || 'Failed to send email');
       }
-      if (!res.ok || !data.success) throw new Error((data && data.error) || 'Failed');
+      
       alert('Message sent successfully!');
       setFormData({ name: '', email: '', message: '' });
     } catch (err) {
+      console.error('Email error:', err);
       const message = err instanceof Error ? err.message : 'Failed to send. Please try again later.';
       alert(message);
     }

@@ -23,9 +23,14 @@ export default async function handler(req, res) {
   }
 
   try {
+    // Check if required environment variables are set
+    if (!process.env.SMTP_HOST || !process.env.SMTP_USER || !process.env.SMTP_PASS) {
+      return res.status(500).json({ error: 'SMTP configuration missing. Please set environment variables.' });
+    }
+
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST,
-      port: Number(process.env.SMTP_PORT),
+      port: Number(process.env.SMTP_PORT) || 587,
       secure: process.env.SMTP_SECURE === 'true',
       auth: {
         user: process.env.SMTP_USER,
@@ -36,17 +41,23 @@ export default async function handler(req, res) {
     // Verify connection
     await transporter.verify();
 
-    await transporter.sendMail({
+    const mailOptions = {
       from: process.env.SMTP_FROM || process.env.SMTP_USER,
       to: process.env.CONTACT_TO || process.env.SMTP_USER,
       subject: `Portfolio Contact: ${name}`,
       text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
       replyTo: email,
-    });
+    };
 
-    res.status(200).json({ success: true });
+    const info = await transporter.sendMail(mailOptions);
+    console.log('Email sent:', info.messageId);
+
+    res.status(200).json({ success: true, messageId: info.messageId });
   } catch (error) {
     console.error('Email error:', error);
-    res.status(500).json({ error: error.message || 'Email not sent' });
+    res.status(500).json({ 
+      error: error.message || 'Email not sent',
+      details: process.env.NODE_ENV === 'development' ? error.stack : undefined
+    });
   }
 }
