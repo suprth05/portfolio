@@ -54,8 +54,8 @@ const Certifications = ({ darkMode }: CertificationsProps) => {
       title: 'First Place – Pictorial: Art and Mathematics',
       issuer: 'National Mathematics Day with IQAC',
       date: '2024',
-      image: '/pictorial.jpg',
-      link: '/pictorial.jpg',
+      image: '/Pictorial.jpg',
+      link: '/Pictorial.jpg',
     },
   ];
 
