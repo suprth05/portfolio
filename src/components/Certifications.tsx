@@ -47,15 +47,15 @@ const Certifications = ({ darkMode }: CertificationsProps) => {
       title: 'Best Project – Solar Powered UAV',
       issuer: 'Academic Year 2023–24',
       date: '2024',
-      image: '/public/best_project.jpg',
-      link: '/public/best_project.jpg',
+      image: '/best_project.jpg',
+      link: '/best_project.jpg',
     },
     {
       title: 'First Place – Pictorial: Art and Mathematics',
       issuer: 'National Mathematics Day with IQAC',
       date: '2024',
-      image: '/public/Pictorial.jpg',
-      link: '/public/Pictorial.jpg',
+      image: '/pictorial.jpg',
+      link: '/pictorial.jpg',
     },
   ];
 

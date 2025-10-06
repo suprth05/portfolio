@@ -20,7 +20,7 @@ const Contact = ({ darkMode }: ContactProps) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const res = await fetch('/api/contact', {
+      const res = await fetch('/api/sendEmail', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
@@ -37,7 +37,7 @@ const Contact = ({ darkMode }: ContactProps) => {
           throw new Error(text || `Request failed with status ${res.status}`);
         }
       }
-      if (!res.ok || !data.ok) throw new Error((data && data.error) || 'Failed');
+      if (!res.ok || !data.success) throw new Error((data && data.error) || 'Failed');
       alert('Message sent successfully!');
       setFormData({ name: '', email: '', message: '' });
     } catch (err) {
