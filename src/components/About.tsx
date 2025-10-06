@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
-import profilePhoto from '../../supreeth.jpeg';
+const profilePhoto = '/supreeth.jpeg';
 import { useRef } from 'react';
 import { Code, Lightbulb, Brain } from 'lucide-react';
 

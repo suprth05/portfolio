@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import profilePhoto from '../../supreeth.jpeg';
+const profilePhoto = '/supreeth.jpeg';
 import { Github, Linkedin, Mail, MapPin } from 'lucide-react';
 
 interface HeroProps {

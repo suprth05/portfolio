@@ -40,15 +40,15 @@ const Certifications = ({ darkMode }: CertificationsProps) => {
       title: 'MONAITHON 2025 – Runner Up',
       issuer: 'JNNCE, Shivamogga',
       date: '2025',
-      image: './Monaithon.jpg',
+      image: '/Monaithon.jpg',
       link: '/Monaithon.jpg',
     },
     {
       title: 'Best Project – Solar Powered UAV',
       issuer: 'Academic Year 2023–24',
       date: '2024',
-      image: './best_project.jpg',
-      link: './best_project.jpg',
+      image: '/best_project.jpg',
+      link: '/best_project.jpg',
     },
     {
       title: 'First Place – Pictorial: Art and Mathematics',
